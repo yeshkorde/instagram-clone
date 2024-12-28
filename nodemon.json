@@ -1,0 +1,9 @@
+{
+    "watch": ["server", "pages"],       
+    "ext": "js,jsx,ts,tsx",            
+    "ignore": ["node_modules", "public"],  
+    "execMap": {
+      "js": "node"  
+    }
+  }
+  
