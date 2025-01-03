@@ -6,7 +6,6 @@ import { useEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import axios from "axios";
 
-
 function Page() {
   const reelRefs = useRef([]);
   const [reels, setReels] = useState([]);
@@ -25,8 +24,12 @@ function Page() {
       const viewportHeight = e.target.offsetHeight;
       const viewportOffsetTop = scrollPosition;
       const viewportOffsetBottom = viewportOffsetTop + viewportHeight;
-      const isVideoVisible = viewportOffsetTop < videoOffsetBottom && viewportOffsetBottom > videoOffsetTop;
-      const isVideoHalfVisible = viewportOffsetTop + viewportHeight / 1.25 < videoOffsetBottom && viewportOffsetBottom > videoOffsetTop + videoHeight / 1.25;
+      const isVideoVisible =
+        viewportOffsetTop < videoOffsetBottom &&
+        viewportOffsetBottom > videoOffsetTop;
+      const isVideoHalfVisible =
+        viewportOffsetTop + viewportHeight / 1.25 < videoOffsetBottom &&
+        viewportOffsetBottom > videoOffsetTop + videoHeight / 1.25;
       if (isVideoHalfVisible) {
         if (document.hasFocus()) {
           video.play();
@@ -42,7 +45,6 @@ function Page() {
       const response = await axios.get("/api/Reels/Get-All-Reels");
       setReels(response.data.reels);
       console.log(response.data);
-      
     } catch (error) {
       console.log(error.message);
     }
@@ -59,7 +61,14 @@ function Page() {
       onScroll={handleScroll}
     >
       {reels.map((reel, index) => (
-        <ReelComponent key={reel.id} reel={reel} url={reel.videoUrl} ref={reelRefs[index]} isVideoMuted={isVideoMuted} setIsVideoMuted={setIsVideoMuted} />
+        <ReelComponent
+          key={reel.id}
+          reel={reel}
+          url={reel.videoUrl}
+          ref={reelRefs[index]}
+          isVideoMuted={isVideoMuted}
+          setIsVideoMuted={setIsVideoMuted}
+        />
       ))}
     </div>
   );
